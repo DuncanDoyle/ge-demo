@@ -1,0 +1,28 @@
+apiVersion: fed.gateway.solo.io/v1
+kind: FederatedVirtualService
+metadata:
+  name: httpbin-fvs
+  namespace: gloo-system
+spec:
+  placement:
+    clusters:
+      - local
+    namespaces:
+      - gloo-federation
+  template:
+    spec:
+      virtualHost:
+        domains:
+          - "api.federation.example.com"
+        routes:
+          - matchers:
+            - prefix: /httpbin/
+            routeAction:
+              single:
+                upstream:
+                  name: default-httpbin-8000
+                  namespace: gloo-system 
+            options:
+              prefixRewrite: /
+    metadata:
+      name: fed-virtualservice

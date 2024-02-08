@@ -1,0 +1,21 @@
+apiVersion: fed.gloo.solo.io/v1
+kind: FederatedUpstream
+metadata:
+  name: httpbin-federated-upstream
+  namespace: gloo-system
+spec:
+  placement:
+    clusters:
+      - local
+    namespaces:
+      - gloo-federation
+  template:
+    spec:
+      kube:
+        selector:
+          app: httpbin
+        serviceName: httpbin
+        serviceNamespace: default
+        servicePort: 8000
+    metadata:
+      name: httpbin-upstream
