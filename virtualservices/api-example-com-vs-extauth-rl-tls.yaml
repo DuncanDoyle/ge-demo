@@ -6,8 +6,10 @@ metadata:
 spec:
   sslConfig:
     secretRef:
-      name: upstream-tls
+      name: api-example-com
       namespace: gloo-system
+    # sniDomains:
+    # - api.example.com
   virtualHost:
     domains:
     - 'api.example.com'

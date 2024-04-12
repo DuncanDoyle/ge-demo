@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: extauth-grpcservice
+spec:
+  selector:
+    matchLabels:
+      app: grpc-extauth
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: grpc-extauth
+    spec:
+      containers:
+      # Example gRPC passthrough auth-service. Use header "authorization: authorize me" to AuthN/AuthZ
+        - name: grpc-extauth
+          image: quay.io/solo-io/passthrough-grpc-service-example
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9001

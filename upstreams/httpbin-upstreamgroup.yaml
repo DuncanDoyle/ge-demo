@@ -1,0 +1,17 @@
+apiVersion: gloo.solo.io/v1
+kind: UpstreamGroup
+metadata:
+  name: httpbin-group
+  namespace: gloo-system
+spec:
+  destinations:
+  - destination:
+      upstream:
+        name: default-httpbin-8000
+        namespace: gloo-system
+    weight: 5
+  - destination:
+      upstream:
+        name: default-httpbin-v2-8000
+        namespace: gloo-system
+    weight: 5

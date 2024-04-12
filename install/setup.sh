@@ -24,6 +24,7 @@ policies/extauth/create-apikey-for-ratelimit.sh
 policies/extauth/create-apikey-for-ratelimit-warmup.sh
 
 # Apply the VirtualService
-kubectl apply -f virtualservices/api-example-com-vs-extauth-rl.yaml
+kubectl apply -f virtualservices/api-example-com-vs.yaml
+kubectl apply -f virtualservices/gloofed-example-com-vs.yaml
 
 popd

@@ -1,0 +1,28 @@
+apiVersion: gloo.solo.io/v1
+kind: Upstream
+metadata:
+  name: default-httpbin-8000
+  namespace: gloo-system
+spec:
+  discoveryMetadata:
+    labels:
+      app: echo-v2
+  healthChecks:
+  - alwaysLogHealthCheckFailures: true
+    eventLogPath: /dev/stdout
+    healthyThreshold: 3
+    httpHealthCheck:
+      path: /health
+    interval: 10s
+    reuseConnection: false
+    timeout: 10s
+    unhealthyThreshold: 1
+  kube:
+    selector:
+      app: echo-v2
+    serviceName: echo-v2
+    serviceNamespace: echo
+    servicePort: 8080
+  loadBalancerConfig:
+    healthyPanicThreshold: 0
+    ringHash: {}
